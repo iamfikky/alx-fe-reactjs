@@ -1,7 +1,224 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* app.css */
+
+/* Global reset / base */
+:root{
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #ef4444; /* red accent for delete/important */
+  --primary: #0ea5a4; /* teal-ish primary */
+  --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+  --gap: 1rem;
 }
 
+* { box-sizing: border-box; }
+html,body,#root { height:100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #111827;
+  line-height: 1.4;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* App container */
+.app-container {
+  max-width: 980px;
+  margin: 28px auto;
+  padding: 24px;
+  background: transparent;
+}
+
+/* Header */
+.app-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 16px;
+}
+
+.app-title {
+  font-size:1.6rem;
+  font-weight:700;
+  letter-spacing: -0.02em;
+}
+
+/* Navigation */
+.nav {
+  display:flex;
+  gap: 12px;
+  align-items:center;
+}
+
+.nav a {
+  text-decoration:none;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background .15s, transform .06s;
+}
+
+.nav a:hover {
+  background: rgba(14,165,164,0.08);
+  transform: translateY(-1px);
+}
+
+/* Layout: search + content */
+.top-controls {
+  display:flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+/* Search bar */
+.search-input {
+  flex: 1 1 420px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6edf0;
+  background: #fff;
+  box-shadow: var(--shadow);
+  font-size: 0.95rem;
+}
+
+/* Two-column main layout (list + details / side) */
+.main-grid {
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+  align-items:start;
+}
+
+/* Left column card container */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* Add recipe form */
+.add-form .form-row {
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.input, textarea {
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #e6edf0;
+  font-size: 0.95rem;
+  background: #fff;
+  resize:vertical;
+}
+
+textarea { min-height:90px; }
+
+/* Buttons */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform .06s, box-shadow .08s;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 6px 14px rgba(14,165,164,0.12);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #0f172a;
+  border: 1px solid #e6edf0;
+}
+
+/* Delete button */
+.btn-delete {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 8px 18px rgba(239,68,68,0.12);
+}
+
+/* Favorite button (heart) */
+.btn-fav {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.06);
+  color: var(--accent);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* Recipe list item / card */
+.recipe-item {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,250,1));
+}
+
+.recipe-item h3 {
+  margin:0;
+  font-size:1.05rem;
+}
+
+.recipe-item p {
+  margin:0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Details panel (right column) */
+.details-panel {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.details-panel .meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Favorites & Recommendations list */
+.side-list {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* Empty states */
+.empty {
+  color: var(--muted);
+  font-style: italic;
+  padding: 10px 0;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .app-container { padding: 12px; }
+  .search-input { width: 100%; }
+}
