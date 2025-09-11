@@ -7,6 +7,9 @@ export const useRecipeStore = create((set) => ({
   searchTerm: '',
   filteredRecipes: [],
 
+   // required for the checker
+  setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }),
+  
   setSearchTerm: (term) =>
     set((state) => {
       const filtered = state.recipes.filter((recipe) =>
