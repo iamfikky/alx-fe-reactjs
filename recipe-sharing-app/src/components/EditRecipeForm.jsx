@@ -13,8 +13,8 @@ const navigate = useNavigate();
 
 
 const handleSubmit = (e) => {
-e.preventDefault();
-if (!title.trim() || !description.trim()) return;
+    event.preventDefault();
+    if (!title.trim() || !description.trim()) return;
 
 
 updateRecipe({ id: existingRecipe.id, title, description });
