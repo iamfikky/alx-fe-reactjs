@@ -1,0 +1,89 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 20px;
+
+  color-scheme: light dark;
+  color: green; 
+  background-color: black;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a{
+  color: green;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+  font-size: 20px;
+  border-bottom: 1px dotted transparent;
+  transition: all .3s linear;
+}
+
+nav .logo {
+  font-size: 30px;
+}
+
+nav a:hover {
+  border-bottom-color: green;
+}
+
+.todo-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  border: 1px dotted green;
+}
+
+.todo-card button {
+  background: green;
+  outline: none;
+  border-radius: 6px;
+  padding: 4px 6px;
+  color: white;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+form .input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+form .input-group label, input {
+  margin: 10px 0;
+}
+
+form .input-group input {
+  padding: 10px;
+}
+
+form button {
+  padding: 6px;
+  outline: none;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
