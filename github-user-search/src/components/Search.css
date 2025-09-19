@@ -2,12 +2,14 @@
   max-width: 800px;
   margin: 50px auto;
   text-align: center;
+  padding: 0 10px;
 }
 
 input {
   padding: 10px;
-  width: 60%;
-  margin-right: 10px;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -28,7 +30,7 @@ button:hover {
 /* Grid layout for user cards */
 .users-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
@@ -36,35 +38,78 @@ button:hover {
 /* User card styling */
 .user-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding: 15px;
   border: 1px solid #eee;
   border-radius: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
   background-color: #f9f9f9;
+  text-align: center;
 }
 
 .user-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .user-card img {
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 
-.user-card div h3 {
-  margin: 0;
-  font-size: 1.1rem;
+.user-card h3 {
+  margin: 5px 0;
+  font-size: 1.2rem;
 }
 
-.user-card div a {
+.user-card p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.user-card a {
   text-decoration: none;
   color: #0366d6;
   font-size: 0.9rem;
 }
 
-.user-card div a:hover {
+.user-card a:hover {
   text-decoration: underline;
+}
+
+/* Load More button styling */
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.load-more-btn {
+  padding: 10px 20px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.load-more-btn:hover {
+  background-color: #16a34a;
+}
+
+/* Responsive adjustments */
+@media (min-width: 600px) {
+  .user-card {
+    flex-direction: row;
+    text-align: left;
+  }
+  .user-card img {
+    width: 60px;
+    height: 60px;
+  }
 }
