@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
-import "./Search.css"; // keep your existing CSS
+import "./Search.css"; 
 
 export default function Search() {
   const [username, setUsername] = useState("");
