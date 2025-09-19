@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
-import UserCard from "./UserCard";
 import "./Search.css";
 
 export default function Search() {
@@ -18,15 +17,14 @@ export default function Search() {
     setUsers([]);
 
     try {
-      // fetchUserData should return an array of users
       const results = await fetchUserData(query);
       if (results.length === 0) {
-        setError("No users found");
+        setError("Looks like we cant find the user");
       } else {
         setUsers(results);
       }
     } catch (err) {
-      setError("Looks like we can't find users");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -49,7 +47,19 @@ export default function Search() {
 
       <div className="users-list">
         {users.map((user) => (
-          <UserCard key={user.id} user={user} />
+          <div key={user.id} className="user-card">
+            <img src={user.avatar_url} alt={user.login} width="50" />
+            <div>
+              <h3>{user.login}</h3>
+              <a
+                href={user.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Profile
+              </a>
+            </div>
+          </div>
         ))}
       </div>
     </div>
