@@ -1,24 +1,56 @@
 import React, { useState } from "react";
+import { searchUsers } from "../services/githubService";
+import UserCard from "./UserCard";
+import "./Search.css";
 
-export default function SearchBar({ onSearch }) {
+export default function Search() {
   const [query, setQuery] = useState("");
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (query) {
-      onSearch(query);
+    if (!query) return;
+
+    setLoading(true);
+    setError(null);
+    setUsers([]);
+
+    try {
+      const results = await searchUsers(query);
+      if (results.length === 0) {
+        setError("No users found");
+      } else {
+        setUsers(results);
+      }
+    } catch (err) {
+      setError("Looks like we can't find users");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search GitHub users..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div className="search-container">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search GitHub users..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
+      <div className="users-list">
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </div>
+    </div>
   );
 }

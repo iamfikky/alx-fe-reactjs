@@ -1,0 +1,70 @@
+.search-container {
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+input {
+  padding: 10px;
+  width: 60%;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #0366d6;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #024ea2;
+}
+
+/* Grid layout for user cards */
+.users-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* UserCard styling */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #f9f9f9;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.user-card img {
+  border-radius: 50%;
+}
+
+.user-card div h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.user-card div a {
+  text-decoration: none;
+  color: #0366d6;
+  font-size: 0.9rem;
+}
+
+.user-card div a:hover {
+  text-decoration: underline;
+}

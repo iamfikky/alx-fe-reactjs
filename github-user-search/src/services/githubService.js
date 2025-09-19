@@ -7,7 +7,7 @@ export const searchUsers = async (query) => {
     const response = await axios.get(`${GITHUB_API}/search/users`, {
       params: { q: query },
     });
-    return response.data.items;
+    return response.data.items; // returns an array of users
   } catch (error) {
     console.error(error);
     return [];
