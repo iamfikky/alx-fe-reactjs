@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 import UserCard from "./UserCard";
 import "./Search.css";
 
@@ -18,7 +18,8 @@ export default function Search() {
     setUsers([]);
 
     try {
-      const results = await searchUsers(query);
+      // fetchUserData should return an array of users
+      const results = await fetchUserData(query);
       if (results.length === 0) {
         setError("No users found");
       } else {
