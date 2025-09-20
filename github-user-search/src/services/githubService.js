@@ -1,4 +1,4 @@
-import axios from "axios"; // <- Make sure this line is at the top
+import axios from "axios"; // <- Keep this at the top
 
 const GITHUB_API = "https://api.github.com";
 
@@ -14,6 +14,7 @@ export const fetchUserData = async (
     if (location) query += `location:${location} `;
     if (minRepos) query += `repos:>=${minRepos}`;
 
+    // Correct API endpoint
     const response = await axios.get(`${GITHUB_API}/search/users`, {
       params: { q: query.trim(), per_page: 30, page },
     });
