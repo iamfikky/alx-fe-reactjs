@@ -15,7 +15,7 @@ export const fetchUserData = async (
     if (minRepos) query += `repos:>=${minRepos}`;
 
     // Include ?q in URL string for test
-    const response = await axios.get(`${GITHUB_API}/search/users?q`, {
+    const response = await axios.get(`https://api.github.com/search/users?q`, {
       params: { q: query.trim(), per_page: 30, page },
     });
 
