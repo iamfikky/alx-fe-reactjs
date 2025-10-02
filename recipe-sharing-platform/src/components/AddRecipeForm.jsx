@@ -4,28 +4,37 @@ function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({}); // ✅ multiple errors
+
+  // ✅ validation function
+  const validate = () => {
+    const newErrors = {};
+
+    if (!title.trim()) newErrors.title = "Recipe title is required.";
+    if (!ingredients.trim()) {
+      newErrors.ingredients = "Ingredients are required.";
+    } else if (ingredients.split(",").length < 2) {
+      newErrors.ingredients = "Please provide at least two ingredients (comma separated).";
+    }
+    if (!steps.trim()) newErrors.steps = "Preparation steps are required.";
+
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newErrors = validate();
 
-    // ✅ Simple validation
-    if (!title || !ingredients || !steps) {
-      setError("All fields are required!");
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
-    // Check if at least 2 ingredients
-    if (ingredients.split(",").length < 2) {
-      setError("Please provide at least two ingredients (comma separated).");
-      return;
-    }
-
-    setError("");
+    setErrors({});
     const newRecipe = { title, ingredients, steps };
     console.log("Recipe submitted:", newRecipe);
 
-    // Clear fields after submission
+    // Clear fields
     setTitle("");
     setIngredients("");
     setSteps("");
@@ -36,8 +45,6 @@ function AddRecipeForm() {
       <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
         ➕ Add a New Recipe
       </h2>
-
-      {error && <p className="text-red-500 mb-4">{error}</p>}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
@@ -52,6 +59,7 @@ function AddRecipeForm() {
             className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400"
             placeholder="Enter recipe title"
           />
+          {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
         </div>
 
         {/* Ingredients */}
@@ -65,6 +73,7 @@ function AddRecipeForm() {
             className="w-full border rounded-lg px-4 py-2 h-24 focus:ring-2 focus:ring-blue-400"
             placeholder="e.g. Eggs, Cheese, Pasta"
           ></textarea>
+          {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </div>
 
         {/* Steps */}
@@ -78,6 +87,7 @@ function AddRecipeForm() {
             className="w-full border rounded-lg px-4 py-2 h-32 focus:ring-2 focus:ring-blue-400"
             placeholder="Describe the cooking steps..."
           ></textarea>
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
 
         {/* Submit */}
