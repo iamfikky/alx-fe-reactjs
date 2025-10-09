@@ -12,7 +12,8 @@ export default function App() {
         <Link to="/" className="hover:underline">Home</Link>
         <Link to="/about" className="hover:underline">About</Link>
         <Link to="/profile" className="hover:underline">Profile</Link>
-        <Link to="/posts/1" className="hover:underline">Dynamic Post</Link>
+        <Link to="/blog/1" className="hover:underline">Dynamic Blog Post</Link> {/* updated */}
+
       </nav>
 
       <div className="p-6">
@@ -31,7 +32,7 @@ export default function App() {
           />
 
           {/* Dynamic Route */}
-          <Route path="/posts/:id" element={<BlogPost />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
       </div>
     </Router>
