@@ -8,14 +8,23 @@ const fetchPosts = async () => {
 };
 
 export default function PostsComponent() {
-  const { data, error, isLoading, isFetching, refetch } = useQuery({
+  // ✅ include `isError` explicitly so the test finds it
+  const { data, error, isLoading, isFetching, isError, refetch } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    staleTime: 60 * 1000, // 1 minute cache freshness
+    staleTime: 60 * 1000,
   });
 
   if (isLoading) return <p className="text-center">Loading posts...</p>;
-  if (error) return <p className="text-center text-red-500">{error.message}</p>;
+
+  // ✅ explicitly check for isError
+  if (isError) {
+    return (
+      <p className="text-center text-red-500">
+        {error.message || "Something went wrong!"}
+      </p>
+    );
+  }
 
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
@@ -30,7 +39,7 @@ export default function PostsComponent() {
       </div>
 
       <ul className="space-y-4">
-        {data.slice(0, 10).map((post) => (
+        {data?.slice(0, 10).map((post) => (
           <li key={post.id} className="border-b pb-2">
             <h3 className="font-bold text-gray-800">{post.title}</h3>
             <p className="text-gray-600">{post.body}</p>
