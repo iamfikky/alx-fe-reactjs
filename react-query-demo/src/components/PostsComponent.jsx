@@ -8,23 +8,24 @@ const fetchPosts = async () => {
 };
 
 export default function PostsComponent() {
-  // ✅ include `isError` explicitly so the test finds it
-  const { data, error, isLoading, isFetching, isError, refetch } = useQuery({
+  const {
+    data,
+    error,
+    isLoading,
+    isFetching,
+    isError,
+    refetch,
+  } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    staleTime: 60 * 1000,
+    staleTime: 60 * 1000, // 1 minute cache freshness
+    cacheTime: 5 * 60 * 1000, // 5 minutes before garbage collection
+    refetchOnWindowFocus: true, // refetch when window regains focus
+    keepPreviousData: true, // keep previous data while refetching
   });
 
   if (isLoading) return <p className="text-center">Loading posts...</p>;
-
-  // ✅ explicitly check for isError
-  if (isError) {
-    return (
-      <p className="text-center text-red-500">
-        {error.message || "Something went wrong!"}
-      </p>
-    );
-  }
+  if (isError) return <p className="text-center text-red-500">{error.message}</p>;
 
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
@@ -39,7 +40,7 @@ export default function PostsComponent() {
       </div>
 
       <ul className="space-y-4">
-        {data?.slice(0, 10).map((post) => (
+        {data.slice(0, 10).map((post) => (
           <li key={post.id} className="border-b pb-2">
             <h3 className="font-bold text-gray-800">{post.title}</h3>
             <p className="text-gray-600">{post.body}</p>
