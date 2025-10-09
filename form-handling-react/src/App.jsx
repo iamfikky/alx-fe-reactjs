@@ -3,12 +3,15 @@ import FormikForm from "./components/formikForm";
 
 function App() {
   return (
-    <div className="p-6">
-      {/* Controlled Component Form */}
-      <RegistrationForm />
+    <div className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+        React Form Handling — Controlled vs Formik
+      </h1>
 
-      {/* Formik Form */}
-      {/* <FormikForm />*/ }
+      <div className="grid md:grid-cols-2 gap-8">
+        <RegistrationForm />
+        <FormikForm />
+      </div>
     </div>
   );
 }
