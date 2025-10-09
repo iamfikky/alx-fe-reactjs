@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function RegistrationForm() {
   const [username, setUsername] = useState("");
@@ -14,14 +14,14 @@ export default function RegistrationForm() {
     if (!username) {
       newErrors.username = "Username is required";
     }
-    if (!email) {  //  explicit check for email
+    if (!email) {
       newErrors.email = "Email is required";
     }
-    if (!password) {  // explicit check for password
+    if (!password) {
       newErrors.password = "Password is required";
     }
 
-    setErrors(newErrors); // required by the test
+    setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
       return;
@@ -44,7 +44,7 @@ export default function RegistrationForm() {
           <input
             type="text"
             name="username"
-            value={username}  // required by the test
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded"
           />
@@ -59,7 +59,7 @@ export default function RegistrationForm() {
           <input
             type="email"
             name="email"
-            value={email}  // required by the test
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded"
           />
@@ -74,7 +74,7 @@ export default function RegistrationForm() {
           <input
             type="password"
             name="password"
-            value={password}  // required by the test
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded"
           />
