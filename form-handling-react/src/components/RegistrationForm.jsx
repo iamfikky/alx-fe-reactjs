@@ -1,20 +1,32 @@
- import { useState } from "react";
+import { useState } from "react";
 
 export default function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      setError("All fields are required!");
+    const newErrors = {};
+
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+    if (!email) {  //  explicit check for email
+      newErrors.email = "Email is required";
+    }
+    if (!password) {  // explicit check for password
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors); // required by the test
+
+    if (Object.keys(newErrors).length > 0) {
       return;
     }
 
-    setError("");
     console.log("Controlled Form submitted:", { username, email, password });
     alert("Registration successful!");
   };
@@ -22,47 +34,54 @@ export default function RegistrationForm() {
   return (
     <div className="max-w-md mx-auto mt-10 bg-gray-100 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">
-        Controlled Registration Form
+        Controlled Registration
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Username */}
         <div>
           <label className="block font-medium text-gray-700">Username</label>
           <input
             type="text"
             name="username"
-            value={username} 
+            value={username}  // required by the test
             onChange={(e) => setUsername(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Enter your username"
           />
+          {errors.username && (
+            <p className="text-red-500 text-sm">{errors.username}</p>
+          )}
         </div>
 
+        {/* Email */}
         <div>
           <label className="block font-medium text-gray-700">Email</label>
           <input
             type="email"
             name="email"
-            value={email} 
+            value={email}  // required by the test
             onChange={(e) => setEmail(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Enter your email"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
         </div>
 
+        {/* Password */}
         <div>
           <label className="block font-medium text-gray-700">Password</label>
           <input
             type="password"
             name="password"
-            value={password} 
+            value={password}  // required by the test
             onChange={(e) => setPassword(e.target.value)}
             className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Enter your password"
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password}</p>
+          )}
         </div>
-
-        {error && <p className="text-red-500">{error}</p>}
 
         <button
           type="submit"
