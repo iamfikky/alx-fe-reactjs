@@ -1,7 +1,8 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import TodoList from "../components/TodoList";
+import React from "react"; // Required for JSX
+import { render, screen, fireEvent } from "@testing-library/react"; // Testing utilities
+import "@testing-library/jest-dom"; // Extends Jest matchers
+import TodoList from "../components/TodoList"; // Path to the component
+
 
 describe("TodoList Component", () => {
   test("renders initial todos", () => {
