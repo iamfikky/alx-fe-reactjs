@@ -5,14 +5,16 @@ import TodoList from "../components/TodoList"; // Path to the component
 
 
 describe("TodoList Component", () => {
-  test("renders initial todos", () => {
+  beforeEach(() => {
     render(<TodoList />);
+  });
+
+  test("renders initial todos", () => {
     expect(screen.getByText("Learn React")).toBeInTheDocument();
     expect(screen.getByText("Build a Todo App")).toBeInTheDocument();
   });
 
   test("adds a new todo", () => {
-    render(<TodoList />);
     const input = screen.getByPlaceholderText("Add a new todo");
     const button = screen.getByText("Add");
     fireEvent.change(input, { target: { value: "Test Todo" } });
@@ -21,14 +23,12 @@ describe("TodoList Component", () => {
   });
 
   test("toggles todo completion", () => {
-    render(<TodoList />);
     const todo = screen.getByText("Learn React");
     fireEvent.click(todo);
     expect(todo).toHaveClass("line-through");
   });
 
   test("deletes a todo", () => {
-    render(<TodoList />);
     const deleteButton = screen.getAllByText("X")[0];
     fireEvent.click(deleteButton);
     expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
